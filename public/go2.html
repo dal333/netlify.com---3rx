@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Checking your browser...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="3;url=https://yourshop.com">
   <style>
     body {
       background-color: #ffffff;
@@ -41,6 +40,26 @@
     <br>
     If nothing happens, <a href="https://yourshop.com">click here</a>.
   </div>
+
+  <script>
+    // Проверка включён ли JS (если нет — бот)
+    // Установка тестовой куки
+    document.cookie = "cf_check=ok; path=/";
+
+    // Проверка, что кука установлена (боты часто не поддерживают это)
+    function hasCookie(name) {
+      return document.cookie.split(';').some(c => c.trim().startsWith(name + '='));
+    }
+
+    // Редирект только если кука установлена
+    setTimeout(function () {
+      if (hasCookie("cf_check")) {
+        window.location.href = "https://yourshop.com";
+      } else {
+        document.querySelector(".note").innerHTML = "❌ Something went wrong. Please refresh the page manually.";
+      }
+    }, 3000);
+  </script>
 
 </body>
 </html>
