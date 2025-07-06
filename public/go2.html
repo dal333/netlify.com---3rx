@@ -33,7 +33,7 @@
 </head>
 <body>
 
-  <h2>Validating your session...</h2>
+  <h2>Checking your browser...</h2>
   <div class="loader"></div>
   <div class="note">
     Please wait while we redirect you securely.
@@ -44,7 +44,7 @@
   <script>
     // Проверка включён ли JS (если нет — бот)
     // Установка тестовой куки
-    document.cookie = "cf_check=ok; path=/";
+    document.cookie = "cf_check=ok; path=/; SameSite=Lax";
 
     // Проверка, что кука установлена (боты часто не поддерживают это)
     function hasCookie(name) {
